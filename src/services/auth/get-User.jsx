@@ -12,7 +12,7 @@ const fetchUserData = async ({ queryKey }) => {
         return data;
     } catch (err) {
         if (err.response.status === 401) {
-            toast.error("Login Dulu BOSSS!!!");
+            toast.warning("Login Dulu BOSSS!!!");
             setTimeout(() => {
                 window.location.href = "/Login";
             }, 2000);

@@ -11,14 +11,24 @@ export const getMovie = () => (dispatch) => {
     });
 }
 
-export const getMovieDetail = () => (dispatch) => {
-    reduxMovieDetail().then((result) => {
-        dispatch(setDetail(result.data.data))
-        return result
-    }).catch((err) => {
+// export const getMovieDetail = () => (dispatch) => {
+//     reduxMovieDetail().then((result) => {
+//         dispatch(setDetail(result.data.data))
+//         return result
+//     }).catch((err) => {
         
-    });
-}
+//     });
+// }
+
+// export const getMovieDetail = (movieId) => async (dispatch) => {
+//     try {
+//         const response = await reduxMovieDetail(movieId)
+//         dispatch(setDetail(response.data))
+//     } catch (error) {
+        
+//     }
+//     }
+
 // export const getDetailMovie = (movieId) => async (dispatch, getState) => {
 //   try {
 //     const { token } = getState().auth;

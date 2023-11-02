@@ -21,7 +21,7 @@ export const LoginUser = (input) => async (dispatch) => {
 export const LogOut = (input) => (dispatch) => {
     dispatch(setToken(undefined));
     CookieStorage.remove(CookieKeys.AuthToken)
-    toast.warning("Logout Berhasil");
+    toast.info("Logout Berhasil");
     setTimeout(() => {
       window.location.href = "/Login";
     }, 2000);

@@ -10,24 +10,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMovieDetail } from "../../redux/action/movie/authMovie";
 
 export const DetailMovie = () => {
-  const {movieId} = useParams();
-  const dispatch = useDispatch()
+  // const {movieId} = useParams();
+  // const dispatch = useDispatch()
+  // const [details, setdetails] = useState("");
+  // // const token = CookieStorage.get(CookieKeys.AuthToken);
+  // const genres = details && details.genres.map((gen) => gen.name).join(", ");
+
+  // const getmoviedetails = async () => {
+  //   dispatch(getMovieDetail(movieId))
+  // };
+
+  // useEffect(() => {
+  //   getmoviedetails();
+  // }, [movieId]);
+
+  // const {detail} = useSelector((store) => store.movie)
+  // console.log(detail)
+
+  // const data = detail
+
+  const movieId = useParams();
   const [details, setdetails] = useState("");
-  // const token = CookieStorage.get(CookieKeys.AuthToken);
+  const token = CookieStorage.get(CookieKeys.AuthToken);
   const genres = details && details.genres.map((gen) => gen.name).join(", ");
 
-  const getmoviedetails = async () => {
-    dispatch(getMovieDetail(movieId))
+  const getmovie = async () => {
+    const datapopular = await fetchDataMovieDetail(token, movieId);
+    setdetails(datapopular.data);
   };
 
   useEffect(() => {
-    getmoviedetails();
-  }, [movieId]);
+    getmovie();
+  }, [movieId.movieId]);
 
-  const {detail} = useSelector((store) => store.movie)
-  console.log(detail)
-
-  const data = detail
   return (
     // Lihat Movie Detail Berdasarkan ID
     <div className="relative">
