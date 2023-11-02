@@ -25,5 +25,6 @@ export const LogOut = (input) => (dispatch) => {
     setTimeout(() => {
       window.location.href = "/Login";
     }, 2000);
-
 }
+
+

@@ -2,9 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     popular: [],
-    detail: null,
+    detail: [],
     search: [],
-    trailer: [],
 }
 
 const authMovie = createSlice({
@@ -19,9 +18,6 @@ const authMovie = createSlice({
         },
         setSearch: (state, action) =>{
             state.search = action.payload
-        },
-        setTrailer: (state, action) =>{
-            state.trailer = action.payload
         },
     }
 })
