@@ -6,6 +6,7 @@ import { DetailMovie } from "../pages/movie/DetailMovie";
 import { Register } from "../pages/auth/Register";
 import { Login } from "../pages/auth/Login";
 import TokenProtected from "../assets/component/protected/TokenProtected";
+import { Profile } from "../pages/auth/Profile";
 
 export const RouterMovie = () => {
   return (
@@ -16,6 +17,7 @@ export const RouterMovie = () => {
         <Route path="/Detail/:movieId" element={<DetailMovie />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/Profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

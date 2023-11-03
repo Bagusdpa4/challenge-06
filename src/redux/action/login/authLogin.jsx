@@ -1,7 +1,8 @@
 import { CookieKeys, CookieStorage } from "../../../utils/cookies";
-import { setToken } from "../../reducer/auth/authLogin";
+import { setToken, setUser } from "../../reducer/auth/authLogin";
 import { toast } from "react-toastify";
 import { reduxLoginUser } from "../../../services/auth/Login-User";
+import { reduxUser } from "../../../services/auth/get-User";
 
 export const LoginUser = (input) => async (dispatch) => {
   return reduxLoginUser(input).then((result)=>{
@@ -27,4 +28,16 @@ export const LogOut = (input) => (dispatch) => {
     }, 2000);
 }
 
+export const GetMe = (input) => async (dispatch) => {
+  return reduxUser(input).then((result)=>{
+    dispatch(setUser(result.data.data))
+    }).catch((err)=>{
+      if (err.response.status === 401) {
+        toast.warning("Login Dulu BOSSS!!!");
+        setTimeout(() => {
+            window.location.href = "/Login";
+        }, 2000);
+    }
+    })
+}
 

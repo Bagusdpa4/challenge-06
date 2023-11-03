@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AiOutlinePoweroff } from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LogOut } from "../../../redux/action/login/authLogin";
+import { VscAccount } from "react-icons/vsc";
 
 export const NavbarHome = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
   const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
 
   // Fungsi untuk menangani perubahan pada input
   const handleInputChange = (e) => {
@@ -19,6 +22,10 @@ export const NavbarHome = () => {
     if (e.key === "Enter" && search.trim() !== "") {
       navigate(`/Search/${search}`);
     }
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
   };
 
   return (
@@ -48,9 +55,26 @@ export const NavbarHome = () => {
       </div>
 
       {/* Button Logout*/}
-      <div className="px-3 mx-3 space-x-3 flex items-center">
+      <div className="px-3 mx-3 space-x-3 flex items-center relative">
         <span className="font-bold text-red-500 cursor-pointer hover:text-white">
-          <AiOutlinePoweroff size={35} onClick={()=>{dispatch(LogOut())}} />
+          <VscAccount size={40} onClick={toggleDropdown} />
+          {showDropdown && (
+            <div className="absolute right-0 mt-4 bg-white rounded-lg shadow-md w-36">
+              <div className="block text-center px-4 py-2 border-b border-black text-white bg-slate-500 ">
+                !! Welcome !!
+              </div>
+              <span
+                className="block px-4 py-2 text-center border-b border-black text-red-600 hover:bg-red-500 hover:text-white hover:rounded-lg"
+                onClick={()=>{navigate("/Profile")}}
+                >My Profile
+              </span>
+              <span
+                className=" block text-center cursor-pointer px-4 py-2 text-red-500 hover:bg-red-500 hover:text-white hover:rounded-lg" 
+                onClick={()=>{dispatch(LogOut())}}          
+              >Logout
+              </span>
+            </div>
+          )}
         </span>
       </div>
     </div>
