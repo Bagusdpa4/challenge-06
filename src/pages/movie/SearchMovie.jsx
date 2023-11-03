@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { NavbarHome } from "../../assets/component/Header/NavbarHome";
-import { useSearchMovieDataQuery } from "../../services/data-movie/get-data-search-movie";
 import { useNavigate, useParams } from "react-router-dom";
 import { BsArrowDown } from "react-icons/bs"
 import { Footer } from "../../assets/component/Header/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { getMovieSearch } from "../../redux/action/movie/authMovie";
 
 export const SearchMovie = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const { namemovie } = useParams();
-  const [movies, setMovies] = useState([]);
-  const [page, setpage] = useState(1);
 
-  const { data: searchM, isSuccess } = useSearchMovieDataQuery({
-    page: page,
-    query: namemovie,
-  });
+  const movies = useSelector((store) => store.movie.search)
 
-  const searchMovies = async () => {
-    if (searchM) {
-      setMovies(searchM.data);
-    }
-  };
   useEffect(() => {
-    searchMovies();
-  }, [namemovie, isSuccess]);
+    dispatch(getMovieSearch(namemovie));
+  }, [namemovie]);
 
   return (
     <div className="bg-slate-800">

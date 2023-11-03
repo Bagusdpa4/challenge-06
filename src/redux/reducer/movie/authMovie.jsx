@@ -22,6 +22,6 @@ const authMovie = createSlice({
     }
 })
 
-export const { setMovie, setDetail, setSearch, setTrailer } = authMovie.actions
+export const { setMovie, setDetail, setSearch } = authMovie.actions
 
 export default authMovie.reducer;

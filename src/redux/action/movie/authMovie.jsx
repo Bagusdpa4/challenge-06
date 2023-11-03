@@ -1,6 +1,7 @@
 import { reduxMovieDetail } from "../../../services/data-movie/get-data-movie-detail";
 import { reduxMovie } from "../../../services/data-movie/get-data-movie-popular";
-import { setDetail, setMovie } from "../../reducer/movie/authMovie";
+import { reduxMovieSearch } from "../../../services/data-movie/get-data-search-movie";
+import { setDetail, setMovie, setSearch } from "../../reducer/movie/authMovie";
 
 export const getMovie = () => (dispatch) => {
     reduxMovie().then((result) => {
@@ -17,5 +18,14 @@ export const getMovieDetail = (id) => async (dispatch) => {
         return result
     }).catch((err) => {
         
+    });
+}
+
+export const getMovieSearch = (query) => async (dispatch) => {
+    reduxMovieSearch(query).then((result) => {
+        dispatch(setSearch(result.data.data))
+        return result
+    }).catch((err) => {
+
     });
 }
